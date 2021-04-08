@@ -15,7 +15,7 @@ a System-on-a-Chip (SoC)._" - the research paper introducing OpenLANE (click [he
 
 * [**Day-1 [Inception of open-source EDA, OpenLANE and Sky130 PDK]**](https://github.com/Lanka1919/skywater-openlane-physical-design#day-1-inception-of-open-source-eda-openlane-and-sky130-pdk)
 * [**Day-2 [Good floorplan vs bad floorplan and introduction to library cells]**](https://github.com/Lanka1919/skywater-openlane-physical-design#day-2-good-floorplan-vs-bad-floorplan-and-introduction-to-library-cells)
-* [**Day-3 []**](https://github.com/Lanka1919/skywater-openlane-physical-design#day-3)
+* [**Day-3 []**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/README.md#day-3-)
 
 -----------------
 
