@@ -85,7 +85,7 @@ In floorplan, we fix the core utilization ratio, aspect ratio and provide decap 
 
 ### **2.Placement**
 
-After performing floorplan, we place the standard cells (which were already present at the bottom left of the design) and observe the DRCs. We do this by giving the command *run_placement* in OpenLANE and invoke the **Magic** tool to view the layout of the design after placement of std cells.
+After performing floorplan, we place the standard cells (which were already present at the bottom left of the design) and observe the DRCs. We do this by giving the command *run_placement* in OpenLANE. Placement in OpenLANE occurs in two stages - Global placement and Detailed placement. In global placement, all cells are placed on the floorplan in a random manner and in detailed placement, the cells positions are legalized. Legalization in the sense, it makes sure that cells are not overlapping. In OpenLANE, placement happens by having a goal (for congestion driven) to reduce the HPWL (Half Parameter Wire Length), hence taking many iterations. We invoke the **Magic** tool to view the layout of the design after placement of std cells. 
 
 #### Placement in OpenLANE
 ![Placement in OpenLANE](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/placement_in_openlane.png "Placement in OpenLANE")
