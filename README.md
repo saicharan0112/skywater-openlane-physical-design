@@ -15,6 +15,7 @@ a System-on-a-Chip (SoC)._" - the research paper introducing OpenLANE (click [he
 
 * [**Day-1 [Inception of open-source EDA, OpenLANE and Sky130 PDK]**](https://github.com/Lanka1919/skywater-openlane-physical-design#day-1-inception-of-open-source-eda-openlane-and-sky130-pdk)
 * [**Day-2 [Good floorplan vs bad floorplan and introduction to library cells]**](https://github.com/Lanka1919/skywater-openlane-physical-design#day-2-good-floorplan-vs-bad-floorplan-and-introduction-to-library-cells)
+* [**Day-3 []**](https://github.com/Lanka1919/skywater-openlane-physical-design#day-3)
 
 -----------------
 
@@ -106,3 +107,6 @@ We can set the same in OpenLANE as well. Below is the config file in which the e
 ![Timing Driven is set to FALSE](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/timing_driven_is_set_false.png "Timing Driven is set to FALSE")
 
 **The interesting thing to notice is that the PG routing is not done yet. Usually (in ASIC flow), we perform this during Floorplan stage itself. But in the OpenLANE flow, PG routing happens after the CTS and before Routing.**
+------
+
+## Day-3 []
