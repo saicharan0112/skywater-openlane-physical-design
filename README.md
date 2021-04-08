@@ -99,6 +99,7 @@ After performing floorplan, we place the standard cells (which were already pres
 We generally know that there are two types of placements 
 * Timing Driven
 * Placement Driven
+
 We can set the same in OpenLANE as well. Below is the config file in which the environment variable named *PL_TIME_DRIVEN* is set as **0** which indicates FALSE. Hence, the placement performed above is **Congestion Driven Placement**
 
 #### Timing Driven is set to FALSE
