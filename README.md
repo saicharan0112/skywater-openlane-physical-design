@@ -26,21 +26,21 @@ Moving forward, I was introduced to the OpenLane ASIC flow and the tools involve
 
 #### Invoking OpenLane and performing initial preparations
 
-![Invoking OpenLane and performing initial preparations](https://github.com/Lanka1919/skywater-openlane-physical-design/blob/main/invoking%20opelane_initial_settings.png "Invoking OpenLane and performing initial preparations")
+![Invoking OpenLane and performing initial preparations](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-1/invoking%20opelane_initial_settings.png "Invoking OpenLane and performing initial preparations")
 
 #### Running Synthesis
 
-![Running Synthesis](https://github.com/Lanka1919/skywater-openlane-physical-design/blob/main/running_synthesis.png "Running Synthesis")
+![Running Synthesis](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-1/running_synthesis.png "Running Synthesis")
 
 #### Summary of cells in the design after optimization in the synthesis
 
-![Optimized netlist summary](https://github.com/Lanka1919/skywater-openlane-physical-design/blob/main/cells_summary_after_synthesis_and_optimization.png "Optimized netlist summary")
+![Optimized netlist summary](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-1/cells_summary_after_synthesis_and_optimization.png "Optimized netlist summary")
 
 #### Slack Report of min and max paths of the clock
 
-![min_path](https://github.com/Lanka1919/skywater-openlane-physical-design/blob/main/slack_report_of_min_path.png "Min Path Slack Report")
+![min_path](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-1/slack_report_of_min_path.png "Min Path Slack Report")
 
-![max_path](https://github.com/Lanka1919/skywater-openlane-physical-design/blob/main/slack_report_of_min_path.png "Max Path Slack Report")
+![max_path](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-1/slack_report_of_min_path.png "Max Path Slack Report")
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -49,35 +49,38 @@ Moving forward, I was introduced to the OpenLane ASIC flow and the tools involve
 A brief understanding on floorplan stage and the factors involved in it like core utilization, aspect ratio etc., was given. Later, I came across the method of loading the prev run file while preparing the openlane. While performing floorplan, I came across the precedency of various config files. Those files and the order of precedence is shown below.
 ### **1.Floorplanning**
 #### Default floorplan config file
-![default floorplan config file](https://github.com/Lanka1919/skywater-openlane-physical-design/blob/main/slack_report_of_min_path.png "Default file")
+![default floorplan config file](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/floorplan_defaults_config_tcl_file.png "Default file")
 
 #### config file
-![config file](https://github.com/Lanka1919/skywater-openlane-physical-design/blob/main/slack_report_of_min_path.png "config file")
+![config file](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/config_tcl_file.png "config file")
 
 #### Sky130a config file
-![Sky130a config file](https://github.com/Lanka1919/skywater-openlane-physical-design/blob/main/slack_report_of_min_path.png "Sky130a config file")
+![Sky130a config file](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/skywater_openlane_config_tcl_file.png "Sky130a config file")
 
 #### Precendency
-![Precendency](https://github.com/Lanka1919/skywater-openlane-physical-design/blob/main/slack_report_of_min_path.png "Precendency")
+![Precendency](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/Screenshot_2021-04-08%20Sai_Charan_Lanka%20VSD%20-%20Intelligent%20Assessment%20Technology%20%5BVSD%20-%20IAT%5D%20powered%20by%20jnaapti.png "Precendency")
 
 The floorplan was done using *run_floorplan* command and used the **Magic** tool to view the layout by importing the def file generated. 
 
+#### Floorplanning in OpenLANE
+![Floorplan](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/floorplan.png "Floorplan")
+
 #### Magic tool invoking by providing lef, tech library and def file
-![Magic tool config](https://github.com/Lanka1919/skywater-openlane-physical-design/blob/main/slack_report_of_min_path.png "Magic tool config")
+![Magic tool config](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/using_magic_toview_floorplan_def.png "Magic tool config")
 
 #### Layout after floorplan stage in Magic tool
-![Magic Tool Layout](https://github.com/Lanka1919/skywater-openlane-physical-design/blob/main/slack_report_of_min_path.png "")
+![Magic Tool Layout](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/floorplan_layout.png "")
 
 #### Pins and decap cells
-![Pins and Decap cells](https://github.com/Lanka1919/skywater-openlane-physical-design/blob/main/slack_report_of_min_path.png "")
+![Pins and Decap cells](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/pins_and_decap_cells.png "")
 
 #### Welltap cells arranged in checker board fashion
-![Welltap cells](https://github.com/Lanka1919/skywater-openlane-physical-design/blob/main/slack_report_of_min_path.png "Max Path Slack Report")
+![Welltap cells](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/welltap_cells_checkerboard.png "Max Path Slack Report")
 
 #### Location of Std cells in the floorplan
-![Std cells](https://github.com/Lanka1919/skywater-openlane-physical-design/blob/main/slack_report_of_min_path.png "Max Path Slack Report")
+![Std cells](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/stdcells_at_the_bottom_of_floorplan_layout.png "Max Path Slack Report")
 
 #### Std cells in the layout
-![Std cells in the layout](https://github.com/Lanka1919/skywater-openlane-physical-design/blob/main/slack_report_of_min_path.png "Max Path Slack Report")
+![Std cells in the layout](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/std_cell_in_layout.png "Max Path Slack Report")
 
 ### **2.Placement**
