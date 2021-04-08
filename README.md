@@ -107,6 +107,7 @@ We can set the same in OpenLANE as well. Below is the config file in which the e
 ![Timing Driven is set to FALSE](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/timing_driven_is_set_false.png "Timing Driven is set to FALSE")
 
 **The interesting thing to notice is that the PG routing is not done yet. Usually (in ASIC flow), we perform this during Floorplan stage itself. But in the OpenLANE flow, PG routing happens after the CTS and before Routing.**
+
 ------
 
 ## Day-3 []
