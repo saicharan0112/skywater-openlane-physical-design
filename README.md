@@ -60,7 +60,7 @@ A brief understanding on floorplan stage and the factors involved in it like cor
 #### Precendency
 ![Precendency](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/Screenshot_2021-04-08%20Sai_Charan_Lanka%20VSD%20-%20Intelligent%20Assessment%20Technology%20%5BVSD%20-%20IAT%5D%20powered%20by%20jnaapti.png "Precendency")
 
-The floorplan was done using *run_floorplan* command and used the **Magic** tool to view the layout by importing the def file generated. 
+In floorplan, we fix the core utilization ratio, aspect ratio and provide decap cells, welltap cells. Later, we fix the I/O pins position. The floorplan was done using *run_floorplan* command and employed the **Magic** tool to view the layout by importing the def file generated. 
 
 #### Floorplanning in OpenLANE
 ![Floorplan](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/floorplan.png "Floorplan")
@@ -75,12 +75,33 @@ The floorplan was done using *run_floorplan* command and used the **Magic** tool
 ![Pins and Decap cells](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/pins_and_decap_cells.png "")
 
 #### Welltap cells arranged in checker board fashion
-![Welltap cells](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/welltap_cells_checkerboard.png "Max Path Slack Report")
+![Welltap cells](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/welltap_cells_checkerboard.png "Welltap cells arranged in checker board fashion")
 
 #### Location of Std cells in the floorplan
-![Std cells](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/stdcells_at_the_bottom_of_floorplan_layout.png "Max Path Slack Report")
+![Std cells](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/stdcells_at_the_bottom_of_floorplan_layout.png "Location of Std cells in the floorplan")
 
 #### Std cells in the layout
-![Std cells in the layout](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/std_cell_in_layout.png "Max Path Slack Report")
+![Std cells in the layout](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/std_cell_in_layout.png "Std cells in the layout")
 
 ### **2.Placement**
+
+After performing floorplan, we place the standard cells (which were already present at the bottom left of the design) and observe the DRCs. We do this by giving the command *run_placement* in OpenLANE and invoke the **Magic** tool to view the layout of the design after placement of std cells.
+
+#### Placement in OpenLANE
+![Placement in OpenLANE](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/placement_in_openlane.png "Placement in OpenLANE")
+
+#### Invoking Magic tool to view placement.def file
+![Invoking MAGIC tool to view placement.def file](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/invoking_magictool_for_placement.png "Invoking Magic tool to view placement.def file")
+
+#### Layout of the design after Placement stage in Magic tool
+![Layout of the design after Placement stage in Magic tool](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/placement_magictool.png "Layout of the design after Placement stage in Magic tool")
+
+We generally know that there are two types of placements 
+* Timing Driven
+* Placement Driven
+We can set the same in OpenLANE as well. Below is the config file in which the environment variable named *PL_TIME_DRIVEN* is set as **0** which indicates FALSE. Hence, the placement performed above is **Congestion Driven Placement**
+
+#### Timing Driven is set to FALSE
+![Timing Driven is set to FALSE](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/timing_driven_is_set_false.png "Timing Driven is set to FALSE")
+
+**The interesting thing to notice is that the PG routing is not done yet. Usually (in ASIC flow), we perform this during Floorplan stage itself. But in the OpenLANE flow, PG routing happens after the CTS and before Routing.**
