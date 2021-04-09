@@ -15,7 +15,7 @@ a System-on-a-Chip (SoC)._" - the research paper introducing OpenLANE (click [he
 
 * [**Day-1 [Inception of open-source EDA, OpenLANE and Sky130 PDK]**](https://github.com/Lanka1919/skywater-openlane-physical-design#day-1-inception-of-open-source-eda-openlane-and-sky130-pdk)
 * [**Day-2 [Good floorplan vs bad floorplan and introduction to library cells]**](https://github.com/Lanka1919/skywater-openlane-physical-design#day-2-good-floorplan-vs-bad-floorplan-and-introduction-to-library-cells)
-* [**Day-3 []**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/README.md#day-3-)
+* [**Day-3 [Design library cell using Magic Layout and ngspice characterization]**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/README.md#day-3-)
 
 -----------------
 
@@ -110,4 +110,69 @@ We can set the same in OpenLANE as well. Below is the config file in which the e
 
 ------
 
-## Day-3 []
+## Day-3 [Design library cell using Magic Layout and ngspice characterization]
+
+### 16-mask CMOS process
+
+Select the substrate
+~40nm of SiO2
+~80nm of Si3N4
+~1um of photo-resist
+Layouts -> masks are placed on photo-resist layer (acts as protection layer from photo-lithography process) - masks are used here
+UV light will remove photo-resist
+Remove the mask
+etching Si3N4
+Remove extra photo-resist  
+oxidation growth on other areas by placing in oxidation furnace using a process called LOCOS (local oxidation of silicon
+remove  extra Si3N4 using hot phosphoric acid
+
+**N-well and P well formation**
+-> Deposit photo-resist layer
+-> place the mask according to the layout
+-> UV light will remove the unmasked region
+-> remove the mask
+-> Deposit Boron atoms using Ion implantation process to create a P-well
+
+By following similar process and by deposit phosphorous atoms to form N-well
+
+Now take the complete material and place in high temp furnace to drive-in diffusion. After this process, N-well and P-well will diffuse deep into substrate diffusing half of the substrate). This process is called is twin-tub process.
+
+**Formation of Gate**
+-> Photo-resist material is deposited followed by the mask
+-> Deposit boron on the p-well so that we achieve required doping concentration on the surface
+Similarly, we need to do the process for n-well by using arsenic doping.
+Now, we have n-doping and p-doping on the top layer of n-well and p-well. But in this whole process, the chances of damage to the SiO2 layer is inevitable. Hence, we etch this oxide layer using dilute hydrofluoric acid and regrow the oxide layer. All these will effect our threshold voltage.
+
+Now, we grow a thick layer of poly-silicon oxide layer. Again , we deposit the photo-resist material and place mask. We remove the extra photo-resist layer and the masks as well. Now, remove the poly silicon layer outside the photo-resist. 
+Remove the photo-resist material on the gate poly-silicon and at the end, we get the required gate.
+
+Now, we have Gate. Next, we need to form the drain. 
+Deposit the photo-resist material and place the mask on the m-well part. Remove the photo-lithography material and the mask as well. Dope the phosphorus on the p-well side. By this, we get the N-implant in the p-well. 
+We repeat the same steps to deposit the lightly doped P-implant in the N-well. 
+This is called as Lightly doped drain (LDD) formation. 
+After this, we deposit the Si3N4 and use plasma an-isotropic etching process to remove this and form a side-wall  spacers at the gate. 
+Now, we deposit a thin layer of screen oxide to avoid the channeling effect during implantation.
+
+**Formation of source and drain**
+-> We follow the similar process of protecting one side of the substrate (N-well) and dope arsenic on the N-well side. By this, we get more doping of N in the P-well but the less doping which is protected by the side-wall spacers is retained. 
+-> We do the same process but use Boron for N-well. 
+After this, we place this device in a high-temp furnace to let the P+ and N+ penetrate more into their respective wells. 
+After this whole process, we get a doping configuration like P+P-N for N-well and N+N-P for P-well (+ indicated more doping, - indicates less doping)
+
+Now, since our gate, source and drain regions are ready, we now build the contacts to control them.
+We, first, etch the thin oxide using HF solution. We deposit titanium on wafer surface using sputtering process. Then, we heat the wafer in N2 atmosphere which results in the formation of TiS2 in-place of pure titanium. We also have TiN developed on the wafer which will be used for local communications.
+Now, we do photo-lithography (placing photo-resist material and removing the same from unwanted areas using masks). After this we will be left out with the TiN which will be used for interconnects.
+#### A view of CMOS Inverter 
+![A view of CMOS Inverter](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/cmos%20middle%20step.png "Std cells in the layout")
+
+
+**Higher level metal formation**
+-> since the surface of the wafer (incomplete mosfet in this case) is uneven, we deposit a thick layer of SiO2 which is doped with phosphorous or boron. and level up the surface using a process called chemical mechanical polishing (CMP) technique. 
+To develop the higher metal connections, we follow the photo-lithography process and use masks to make space at our required connection positions. 
+
+After this, we deposit a series of materials and do photo-lithography and prepare 3 metal layers. After this, we drill holes to the terminals and get our connections to control our source, gate and drain  regions of the inverter created. If we carefully observe, we totally used 16 masks (the layouts) to build this device. Hence, this complete process is called as “16-mask CMOS process”
+
+#### Final view of CMOS Inverter 
+![Final view of CMOS Inverter](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/cmos%20last%20step.png "Std cells in the layout")
+
+### Library Characterization
