@@ -285,6 +285,8 @@ We try to understand the DRC rules provided by Skylane130 PDK using its tech fil
 #### DRC rules definition in Skylane130A tech file
 ![Tech file](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/drc%20rules%20in%20skylane%20130%20tech%20file.png)
 
+We can related these rules with the skylane google pdk website. Here under Design rules -> Periphery rules, all the DRC rules are defined for each metal, poly and so on.
+Here is the [link](https://skywater-pdk.readthedocs.io/en/latest/rules/periphery.html#m3)
 
 ----
 
