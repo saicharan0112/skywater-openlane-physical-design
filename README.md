@@ -60,7 +60,8 @@ A brief understanding on floorplan stage and the factors involved in it like cor
 ![Sky130a config file](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/skywater_openlane_config_tcl_file.png "Sky130a config file")
 
 #### Precendency
-![Precendency](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/Screenshot_2021-04-08%20Sai_Charan_Lanka%20VSD%20-%20Intelligent%20Assessment%20Technology%20%5BVSD%20-%20IAT%5D%20powered%20by%20jnaapti.png "Precendency")
+**Sky130a config file > config file > default floorplan config file**
+
 
 In floorplan, we fix the core utilization ratio, aspect ratio and provide decap cells, welltap cells. Later, we fix the I/O pins position. The floorplan was done using *run_floorplan* command and employed the **Magic** tool to view the layout by importing the def file generated. 
 
@@ -279,11 +280,11 @@ We try to understand the DRC rules provided by Skylane130 PDK using its tech fil
 
 #### Metal 3 mag file in MAGIC tool
 ![Metal 3 mag file]()
-Value = 
+
 
 #### DRC rules definition in Skylane130A tech file
 ![Tech file](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/drc%20rules%20in%20skylane%20130%20tech%20file.png)
-Value = 
+
 
 ----
 
