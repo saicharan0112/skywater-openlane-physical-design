@@ -292,6 +292,26 @@ Here is the [link](https://skywater-pdk.readthedocs.io/en/latest/rules/periphery
 
 ## Day-4 [Pre-layout timing analysis and importance of good clock tree]
 
+### Developing LEF file for a standard cell design 
+Before we move to this step, we need to make sure that the layout follows two main rules. 
+* The ports must stay on the interconnect of the grids
+* The width and height of the std cell must be odd multiples of no.of grids
 
+#### Grids in the layout
+![Grids](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/grids%20in%20layout.png)
+
+To understand this, we first need to convert the grids size in the MAGIC tool window to the track pitch size. For that, first we observe the values in the tracks.info file under the skylane130 files which is under Skylane130a PDK.
+
+#### Tracks info file
+![Tracks info](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/tracks%20info.png)
+
+Here the first value defines the offset followed by the pitch width. We have these values for both X and Y axis. We transform the default grid size in the MAGIC tool to the tracks.info defined values. We use the command *grid x y xorigin yorigin* where x is horizontal pitch value, y is vertical pitch value, xorigin is horizontal offset value and yorigin is vertical offset value. After implementing this command, our grid structure looks like below.
+
+#### Modified Grid structure 
+![Modified grid structure](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/grids%20changed%20and%20pins%20on%20the%20interconnections.png)
+
+By observing, it is clear that the two rules mentioned at the beginning of the section are met. Ports A and Y are on the interconnects of the grid and the size of the cell layout is 3 times of single grid. 
+
+### Converting Std cell layout to LEF file.
 
 
