@@ -15,7 +15,8 @@ a System-on-a-Chip (SoC)._" - the research paper introducing OpenLANE (click [he
 
 * [**Day-1 [Inception of open-source EDA, OpenLANE and Sky130 PDK]**](https://github.com/Lanka1919/skywater-openlane-physical-design#day-1-inception-of-open-source-eda-openlane-and-sky130-pdk)
 * [**Day-2 [Good floorplan vs bad floorplan and introduction to library cells]**](https://github.com/Lanka1919/skywater-openlane-physical-design#day-2-good-floorplan-vs-bad-floorplan-and-introduction-to-library-cells)
-* [**Day-3 [Design library cell using Magic Layout and ngspice characterization]**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/README.md#day-3-)
+* [**Day-3 [Design library cell using Magic Layout and ngspice characterization]**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/README.md#day-3-design-library-cell-using-magic-layout-and-ngspice-characterization)
+* [**Day-4 [Pre-layout timing analysis and importance of good clock tree]**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/README.md#day-3-)
 
 -----------------
 
@@ -175,4 +176,119 @@ After this, we deposit a series of materials and do photo-lithography and prepar
 #### Final view of CMOS Inverter 
 ![Final view of CMOS Inverter](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/cmos%20last%20step.png "Std cells in the layout")
 
+
+### Understanding DRC in MAGIC tool
+To understand the MAGIC tool and its DRC engine, we use the inverter design mag file. For that, we clone the repo and run MAGIC tool using the **Skylane130A** tech file and **inverter** mag file.
+
+#### Cloning the repo  for the inverter  
+![Cloning the repo  for the inverter](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/cloning%20git%20repo.png "")
+#### Layout of the inverter  
+![Layout of the inverter](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/inverter%20layout.png "")
+#### Layers menubar 
+![Layers menubar ](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/metals.png "")
+#### Connections with input port A  
+![Connections with input port A](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/connections%20with%20input%20A.png "")
+#### Verifying the PMOS source terminal is connected to VDD   
+![Verifying the PMOS source terminal is connected to VDD](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/source%20of%20pmos%20connected%20to%20VDD.png "")
+#### Verifying the NMOS source terminal is connected to VSS   
+![Verifying the NMOS source terminal is connected to VSS](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/source%20of%20nmos%20connected%20to%20VSS.png "")
+#### DRC dropdown menu
+![DRC dropdown menu](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/drc%20window.png "")
+
+To check the DRC engine, we manually create the DRC error. If we could observe the starting imported layout, we get DRC errors as **0**. Now, we delete the N-well and create the error. The interesting thing when compared with traditional verifications tools is the Dynamic DRC engine which means that DRC engine runs in background w.r.t changes in the layout. 
+
+#### Creating DRC error   
+![Creating DRC error](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/creating%20drc%20violation.png "")
+
+To know the complete info about the DRC error, after selecting the drc error, shift to tkcon window of MAGIC tool and see the info as shown below.
+
+#### Error info in the tkcon window   
+![Error info in the tkcon window](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/drc%20error%20showing%20in%20tkcon%20window.png "")
+
+
 ### Library Characterization
+
+Basically, by library characterization, we mean to identify 4 parameters. Rise transition delay, fall transition delay, rise cell delay and fall cell delay
+We consider a basic inverter layout to identify the parameters. After importing the **mag** file and the **skylane130A tech** file, we extract the spice netlist. 
+
+#### Extracting Spice netlist  
+![Extracting Spice netlist](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/extracting%20spice%20netlist%20from%20MAGIC.png "")
+
+#### Extracted Spice netlist 
+![Extracting Spice netlist](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/spice%20netlist%20from%20MAGIC.png)
+
+After extracting it, we invoke the NGSPice tool to performt the transiant analysis and find the 4 parameters mentioned at the beginning of this section.
+
+#### Invoking NGSpice tool   
+![Invoking NGSpice tool](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/invoking%20ngspice%20tool.png "")
+
+If we observe in the above netlist, there are only components and its interconnects present. To perform the analysis, we need to include libraries for connecting the behavious of components to its libs. We need to add sources and mention the type of analysis.
+
+First, we include the libs file for pmos and nmos. Observe the below lib file in which few parameters are mentioned. But we include the model from this lib. 
+
+#### Parameters in lib file   
+![Invoking NGSpice tool](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/invoking%20ngspice%20tool.png "")
+
+In the same file, we have 32 models for pmos i.e., from pshort_model.0 to pshort_model.3l
+#### pshort_model.0   
+![pshort_model.0](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/pshort%20lib%20model%200.png "")
+
+#### pshort_model.1   
+![pshort_model.1](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/pshort%20model%201.png "")
+
+#### pshort_model.2   
+![pshort_model.2](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/pshort%20model%202.png "")
+
+If you could observe among these models, width varies. When we compare remaining all models, we could observe changes in width as well as length. Hence, choosing appropriate model will decide our simulations.
+
+After we complete including libs and specifying sources followed by type of analysis, we run simulation
+
+#### Modified spice netlist
+![modified spice netlist](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/modified%20spice%20file.png)
+#### Transiant Analysis
+![Transiant Analysis](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/trans%20analysis.png)
+
+Now, we calculate the 4 parameters as part of library characterization
+* Rise transition delay = Time taken for the output signal to reach from 20% of max value to 80% of max value.
+* Fall transition delat = Time taken for the output signal to reach from 80% of max value to 20% of max value.
+* Cell rise delay = Time difference between 50% of rising output and 50% of falling output
+* Cell fall delay = Time difference between 50% of falling output and 50% of rising output
+
+#### Rise transition delay
+![Output 20% value](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/output_20_percntg.png)
+![Output 80% value](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/output_80.png)
+Value = 
+
+#### Fall transition delay
+![Fall transition delay](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/fall_transition.png)
+Value = 
+
+#### Cell rise delay
+![Cell rise delay](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/cell_rise_delay.png)
+Value = 
+
+#### Cell fall delay
+![Cell fall delay](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/cell_fall_delay.png)
+Value = 
+
+Thus, we calculate the 4 parameters in the library characterization process.
+
+### Understanding the DRC rules providing by PDK in the form of tech file.
+
+We try to understand the DRC rules provided by Skylane130 PDK using its tech file and the MAGIC tool. First we extracted the drc_rules folder and then imported metal3 mag file into the MAGIC tool, to observe the DRC rules defined for it.
+
+#### Metal 3 mag file in MAGIC tool
+![Metal 3 mag file]()
+Value = 
+
+#### DRC rules definition in Skylane130A tech file
+![Tech file](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/drc%20rules%20in%20skylane%20130%20tech%20file.png)
+Value = 
+
+----
+
+## Day-4 [Pre-layout timing analysis and importance of good clock tree]
+
+
+
+
