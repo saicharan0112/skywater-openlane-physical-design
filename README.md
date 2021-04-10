@@ -17,6 +17,7 @@ a System-on-a-Chip (SoC)._" - the research paper introducing OpenLANE (click [he
 * [**Day-2 [Good floorplan vs bad floorplan and introduction to library cells]**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/README.md#day-2-good-floorplan-vs-bad-floorplan-and-introduction-to-library-cells)
 * [**Day-3 [Design library cell using Magic Layout and ngspice characterization]**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/README.md#day-3-design-library-cell-using-magic-layout-and-ngspice-characterization)
 * [**Day-4 [Pre-layout timing analysis and importance of good clock tree]**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/README.md#day-4-pre-layout-timing-analysis-and-importance-of-good-clock-tree)
+* [**Day-5 []**]()
 
 -----------------
 
@@ -115,7 +116,7 @@ We can set the same in OpenLANE as well. Below is the config file in which the e
 ## Day-3 [Design library cell using Magic Layout and ngspice characterization]
 
 ### 16-mask CMOS process
-
+I found this interesting, hence noted it down while imagining each step in the process. 
 Select the substrate
 ~40nm of SiO2
 ~80nm of Si3N4
@@ -165,7 +166,7 @@ Now, since our gate, source and drain regions are ready, we now build the contac
 We, first, etch the thin oxide using HF solution. We deposit titanium on wafer surface using sputtering process. Then, we heat the wafer in N2 atmosphere which results in the formation of TiS2 in-place of pure titanium. We also have TiN developed on the wafer which will be used for local communications.
 Now, we do photo-lithography (placing photo-resist material and removing the same from unwanted areas using masks). After this we will be left out with the TiN which will be used for interconnects.
 #### A view of CMOS Inverter 
-![A view of CMOS Inverter](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/cmos%20middle%20step.png "Std cells in the layout")
+![A view of CMOS Inverter](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/cmos%20middle%20step.png "")
 
 
 **Higher level metal formation**
@@ -175,7 +176,7 @@ To develop the higher metal connections, we follow the photo-lithography process
 After this, we deposit a series of materials and do photo-lithography and prepare 3 metal layers. After this, we drill holes to the terminals and get our connections to control our source, gate and drain  regions of the inverter created. If we carefully observe, we totally used 16 masks (the layouts) to build this device. Hence, this complete process is called as “16-mask CMOS process”
 
 #### Final view of CMOS Inverter 
-![Final view of CMOS Inverter](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/cmos%20last%20step.png "Std cells in the layout")
+![Final view of CMOS Inverter](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/cmos%20last%20step.png "")
 
 
 ### Understanding DRC in MAGIC tool
@@ -314,4 +315,34 @@ By observing the above layout, it is clear that the two rules mentioned at the b
 
 ### Converting Std cell layout to LEF file.
 
+Since the requirements are met, next step is to generate the LEF file. To do this, we go through two steps.
+* Naming the pins
+* Defining the pin attributes and its use
 
+**Naming the Pin :**
+To do this, we first select the area of the pin (suppose 'A') and click on *Edit* and *Text*. We now get the text dialogue box. We define the name, size of the text, order of the pin and the metal type. For Pins, we use *locali* as metal type and for power, we use *metal 3*.  
+#### Text Dialogue box for pin "A"
+![Text Dialogue box for pin "A"](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/grids%20changed%20and%20pins%20on%20the%20interconnections.png)
+
+**Defining Pin use and attributes :**
+In this step, we define the pin class as *input/output* and pin use as *signal/power/ground*. 
+The commands we use to perform these are - 
+ *port class [input/output]*
+ *port use [signal/power/ground]*
+ 
+ After defining the pins, we extract the LEF file from the layout by using command *lef write*. Below is the lef file generated for the inverter layout.
+ #### LEF file for inverter
+![LEF file for inverter](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/grids%20changed%20and%20pins%20on%20the%20interconnections.png)
+
+Now since we generated the LEF file for the inverter, we need to include it with our design and test it. **The main goal for this whole process till now and next, is to learn how one can add a custom cell design to the OpenLANE flow and work with it.**
+
+To proceed, we need to provide paths for the env variables of the OpenLANE using config.tcl file. There are three types of lib files -  fast, slow and typical.
+Typical lib is the one used for the synthesis purposes and remaining two are same as the fast.lib and slow.lib files we usually come across in the ASIC flow.
+Below are the snapshots of the three lib files
+
+ #### Typical lib file
+![Typical lib file](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/grids%20changed%20and%20pins%20on%20the%20interconnections.png)
+ #### Fast lib file
+![Fast lib file](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/grids%20changed%20and%20pins%20on%20the%20interconnections.png)
+ #### Slow lib file
+![Slow lob file](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/grids%20changed%20and%20pins%20on%20the%20interconnections.png)
