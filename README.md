@@ -248,7 +248,7 @@ After we complete including libs and specifying sources followed by type of anal
 #### Modified spice netlist
 ![modified spice netlist](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/modified%20spice%20file.png)
 #### Transiant Analysis
-![Transiant Analysis](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/trans%20analysis.png)
+![Transiant Analysis](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/new_trans%20analysis.png)
 
 Now, we calculate the 4 parameters as part of library characterization
 * Rise transition delay = Time taken for the output signal to reach from 20% of max value to 80% of max value.
