@@ -346,3 +346,20 @@ Below are the snapshots of the three lib files
 ![Fast lib file](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/grids%20changed%20and%20pins%20on%20the%20interconnections.png)
  #### Slow lib file
 ![Slow lob file](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/grids%20changed%20and%20pins%20on%20the%20interconnections.png)
+
+Now, we perform synthesis and check whether the custom cell got mapped by abc mapping or not. 
+
+
+
+
+After reducing the slack, we run floorplanning and placement in openLANE. We load the placement def file in the MAGIC tool.
+
+
+Presence of custom cell in the layout.  
+
+But, we need to reduce the slack (bring it out of negative value). To do this, we use the OpenSTA, the timing tool in the openLANE flow to opt the slack value. For that, we need to create the config file to use in the OpenSTA tool. Below shown is the config file - 
+
+After loading the config file in the tool, we observe the same slack values previously during the timing analysis after synthesis stage.
+
+
+
