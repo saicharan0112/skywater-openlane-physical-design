@@ -259,19 +259,23 @@ Now, we calculate the 4 parameters as part of library characterization
 #### Rise transition delay
 ![Output 20% value](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/output_20_percntg.png)
 ![Output 80% value](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/output_80.png)
-Value = 
+
+Value = 0.098ns
 
 #### Fall transition delay
 ![Fall transition delay](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/fall_transition.png)
-Value = 
+
+Value = 0.027ns
 
 #### Cell rise delay
 ![Cell rise delay](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/cell_rise_delay.png)
-Value = 
+
+Value = 0.028ns
 
 #### Cell fall delay
 ![Cell fall delay](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-3/cell_fall_delay.png)
-Value = 
+
+Value = 0.0041ns
 
 Thus, we calculate the 4 parameters in the library characterization process.
 
