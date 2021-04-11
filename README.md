@@ -35,11 +35,11 @@ a System-on-a-Chip (SoC)._" - the research paper introducing OpenLANE (click [he
    
   > [**5. Routing**](https://github.com/lankasaicharan/skywater-openlane-physical-design#5routing)
   
-  > [**6. RC Extraction**]()
+  > [**6. RC Extraction**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/README.md#6rc-extraction)
   
-  > [**7. Physical Verification**]()
+  > [**7. Physical Verification**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/README.md#7physical-verification)
    
-  > [**8. GDSII]()
+  > [**8. GDSII](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/README.md#8gdsii)
 -----------------
 
 ## Day-1 [Inception of open-source EDA, OpenLANE and Sky130 PDK]
