@@ -413,7 +413,7 @@ First one was tidious, so I preferred the second option. Below is the cell name 
 
 ![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/presence%20of%20inv%20cell%20in%20cell%20mng.png)
 
-The third option is pretty interesting and easy as well. I will be updating about it sooner or later.
+The third option is pretty interesting and easy as well. Type *findcell instance_name; findbox zoom* and you will 
 
 We succesfully integrated with the design. But, we need to reduce the slack (bring it out of negative value). To do this, we use the OpenSTA, the timing tool in the openLANE flow to opt the slack value. For that, we need to create the config file to use in the OpenSTA tool. Below shown is the config file - 
 ![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/config%20file%20for%20sta.png)
@@ -510,4 +510,10 @@ After getting a clean DRC design, we are ready to tap out (send to the shuttle f
 #### GDSII saving file in MAGIC
 ![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-5/saving%20gdsii%20file.png)
 
+## Acknowledgments
 
+[1] ![Kunal Ghosh](https://github.com/kunalg123) - Co-founder (VSD Corp. Pvt. Ltd)
+[2] ![Nickson Jose](https://github.com/nickson-jose/) - Teaching Assistant - One who guided through out the OpenLANE flow
+[3] Praharsha - Teaching Assistant - One who supported on Slack Channel by solving problems
+[4] Akurathi Radhika - Teaching Assistant - One who supported on Slack Channel by solving problems
+[5] Tim Edwards - Founder (Opencircuitdesign) - One who helped me in solving on how to find a specific cell using its name in MAGIC tool
