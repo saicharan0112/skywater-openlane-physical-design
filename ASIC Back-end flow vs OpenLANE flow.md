@@ -1,9 +1,9 @@
-# ASIC vs OpenLANE flow
+# ASIC Back-end flow vs OpenLANE flow
 
 Apart from performing the whole openlane flow using PICORV32a code, I got an opportunity to compare and find the differences between ASIC flow and the OpenLANE flow. Instead of
 comparing individual steps, I will be comparing individual flows since there is a diff in the steps of building the chip. This gives us a clear idea on the pros and cons w.r.t both flows.
 
-**ASIC Back-end Flow**
+**ASIC Flow**
 <center><img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2F1.bp.blogspot.com%2F-G8N6QZlK_SE%2FXg-BaJ77y_I%2FAAAAAAAAiKw%2FHGPSFpEApGE0Cfiak0OO_95O_cdCa59egCLcBGAsYHQ%2Fs1600%2F22.PNG&f=1&nofb=1"></center>
 
 **OpenLANE Flow**
@@ -76,5 +76,25 @@ Once we are sure about the clean design, we extract the GDSII file which is the 
 ### OpenLANE flow
 
 OpenLANE flow is an automated RTL2GDSII flow where all required tools are embedded into it and you have complete control of each process. We control them by using env variables which will be discussed at each stage since they are unique for each of them.
+ 
+ **Refer the workshop journey from Synthesis to GDSII**
+> [**1. Synthesis**](https://github.com/lankasaicharan/skywater-openlane-physical-design#1synthesis)
+
+> [**2. Floorplanning**](https://github.com/lankasaicharan/skywater-openlane-physical-design#2floorplanning)
+ 
+> [**3. Placement**](https://github.com/lankasaicharan/skywater-openlane-physical-design#3placement)
+
+> [**4. CTS**](https://github.com/lankasaicharan/skywater-openlane-physical-design#4cts)
+
+> [**5. Routing**](https://github.com/lankasaicharan/skywater-openlane-physical-design#5routing)
+  
+> [**6. RC Extraction**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/README.md#6rc-extraction)
+  
+> [**7. Physical Verification**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/README.md#7physical-verification)
+   
+> [**8. GDSII**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/README.md#8gdsii)
+
 
 Before we start the flow, we need to config the OpenLANE flow by mentioning the  
+
+
