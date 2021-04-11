@@ -4,6 +4,7 @@ Apart from performing the whole openlane flow using PICORV32a code, I got an opp
 comparing individual steps, I will be comparing individual flows since there is a diff in the steps of building the chip. This gives us a clear idea on the pros and cons w.r.t both flows.
 
 **ASIC Flow**
+
 <center><img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2F1.bp.blogspot.com%2F-G8N6QZlK_SE%2FXg-BaJ77y_I%2FAAAAAAAAiKw%2FHGPSFpEApGE0Cfiak0OO_95O_cdCa59egCLcBGAsYHQ%2Fs1600%2F22.PNG&f=1&nofb=1"></center>
 
 **OpenLANE Flow**
@@ -96,5 +97,10 @@ OpenLANE flow is an automated RTL2GDSII flow where all required tools are embedd
 
 
 Before we start the flow, we need to config the OpenLANE flow by mentioning the  
+
+## Acknowledgments
+1. Kunal Ghosh - (Co-founder, VLSI System Design) - One who helped me to refine the above content
+1. ASIC Flow image - physicaldesign4u.com
+2. OpenLANE Flow image - official github repo of OpenLANE
 
 
