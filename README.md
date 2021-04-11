@@ -31,7 +31,7 @@ Moving forward, I was introduced to the OpenLane ASIC flow and the tools involve
 
 ![Invoking OpenLane and performing initial preparations](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-1/invoking%20opelane_initial_settings.png "Invoking OpenLane and performing initial preparations")
 
-#### Running Synthesis
+### **1.Synthesis**
 
 ![Running Synthesis](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-1/running_synthesis.png "Running Synthesis")
 
@@ -50,7 +50,7 @@ Moving forward, I was introduced to the OpenLane ASIC flow and the tools involve
 ## Day-2 [Good floorplan vs bad floorplan and introduction to library cells]
 
 A brief understanding on floorplan stage and the factors involved in it like core utilization, aspect ratio etc., was given. Later, I came across the method of loading the prev run file while preparing the openlane. While performing floorplan, I came across the precedency of various config files. Those files and the order of precedence is shown below.
-### **1.Floorplanning**
+### **2.Floorplanning**
 #### Default floorplan config file
 ![default floorplan config file](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/floorplan_defaults_config_tcl_file.png "Default file")
 
@@ -87,7 +87,7 @@ In floorplan, we fix the core utilization ratio, aspect ratio and provide decap 
 #### Std cells in the layout
 ![Std cells in the layout](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-2/std_cell_in_layout.png "Std cells in the layout")
 
-### **2.Placement**
+### **3.Placement**
 
 After performing floorplan, we place the standard cells (which were already present at the bottom left of the design) and observe the DRCs. We do this by giving the command *run_placement* in OpenLANE. Placement in OpenLANE occurs in two stages - Global placement and Detailed placement. In global placement, all cells are placed on the floorplan in a random manner and in detailed placement, the cells positions are legalized. Legalization in the sense, it makes sure that cells are not overlapping. In OpenLANE, placement happens by having a goal (for congestion driven) to reduce the HPWL (Half Parameter Wire Length), hence taking many iterations. We invoke the **Magic** tool to view the layout of the design after placement of std cells. 
 
@@ -324,9 +324,12 @@ Since the requirements are met, next step is to generate the LEF file. To do thi
 * Defining the pin attributes and its use
 
 **Naming the Pin :**
-To do this, we first select the area of the pin (suppose 'A') and click on *Edit* and *Text*. We now get the text dialogue box. We define the name, size of the text, order of the pin and the metal type. For Pins, we use *locali* as metal type and for power, we use *metal 3*.  
+To do this, we first select the area of the pin (suppose 'A') and click on *Edit* and *Text*. We now get the text dialogue box. We define the name, size of the text, order of the pin and the metal type. For Pins, we use *locali* as metal type and for power, we use *metal 3*.
+#### Text Option in the Edit dropdown box (The reason to specify this was, I used delete and other edit commands from here itself previously to experiment)
+![Text Option in the Edit dropdown box](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/text%20option.png)
+
 #### Text Dialogue box for pin "A"
-![Text Dialogue box for pin "A"](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/grids%20changed%20and%20pins%20on%20the%20interconnections.png)
+![Text Dialogue box for pin "A"](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/conveting%20pins%20to%20ports.png)
 
 **Defining Pin use and attributes :**
 In this step, we define the pin class as *input/output* and pin use as *signal/power/ground*. 
@@ -345,25 +348,113 @@ Typical lib is the one used for the synthesis purposes and remaining two are sam
 Below are the snapshots of the three lib files
 
  #### Typical lib file
-![Typical lib file](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/grids%20changed%20and%20pins%20on%20the%20interconnections.png)
+![Typical lib file](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/typical%20lib%20file.png)
  #### Fast lib file
-![Fast lib file](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/grids%20changed%20and%20pins%20on%20the%20interconnections.png)
+![Fast lib file](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/fast%20lib%20file.png)
  #### Slow lib file
-![Slow lob file](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/grids%20changed%20and%20pins%20on%20the%20interconnections.png)
+![Slow lob file](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/slow%20lib%20file.png)
 
 Now, we perform synthesis and check whether the custom cell got mapped by abc mapping or not. 
 
+#### VsdInv getting mapped by the abc mapping tool
+![VsdInv getting mapped by the abc mapping tool](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/custom%20cell%20got%20mapped%20in%20the%20abc%20mapping%20process.png)
 
+During the synthesis optimization process, we have env variables which effect the timing and area.
 
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day4/variables%20effecting%20timing%20and%20area%20opt%20in%20synthesis.png)
 
+Below is the timing after the synthesis.
+
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/timing%20after%20synthesis.png)
+
+As we observed, the slack is too high and we need to reduce it. To do that, we use the previously mentioned env variables. 
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/setting%20the%20env%20variables%20for%20timing%20opt%20in%20synthesis.png)
+
+After this, we need to merge our vsd_inv custom cell lef file and perform the synthesis, followed by floorplanning and placement. The reason we are proceeding to the placement despite having negative slack violations, is to check whether our custom cell got placed along with the picorv32a design or not.
+
+![Merging LEF file](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/merging%20custom%20cell%20lef%20to%20the%20design%20to%20the%20main%20lef.png)
+
+If we could observe in the main lef file, we could see the custom cell lef details in it.
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/after%20merging%20inv%20lef%20into%20merged%20lef.png)
+
+![After opt synthesis](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/after%20optm%20synthesis.png)
+Observe the reduced slack in the above picture after playing with the env variables at the synthesis stage.
 After reducing the slack, we run floorplanning and placement in openLANE. We load the placement def file in the MAGIC tool.
 
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/def%20file%20after%20placement.png)
 
-Presence of custom cell in the layout.  
+To find the presence of custom cell in the layout, I figured out three options - 
+* Manually zooming and locating the cell
+* Looking for the cell name in the cell manager lib in the MAGIC tool
+* Using a simple command to locate the cell by giving the cell name as input
 
-But, we need to reduce the slack (bring it out of negative value). To do this, we use the OpenSTA, the timing tool in the openLANE flow to opt the slack value. For that, we need to create the config file to use in the OpenSTA tool. Below shown is the config file - 
+First one was tidious, so I preferred the second option. Below is the cell name in the cell manager dialogue box. The cell manager will show all cells present in the def file. Though this is not a correct alternative to the first opt, but it works. Below is the picture for it.
 
-After loading the config file in the tool, we observe the same slack values previously during the timing analysis after synthesis stage.
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/presence%20of%20inv%20cell%20in%20cell%20mng.png)
 
+The third option is pretty interesting and easy as well. I will be updating about it sooner or later.
 
+We succesfully integrated with the design. But, we need to reduce the slack (bring it out of negative value). To do this, we use the OpenSTA, the timing tool in the openLANE flow to opt the slack value. For that, we need to create the config file to use in the OpenSTA tool. Below shown is the config file - 
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/config%20file%20for%20sta.png)
+
+After loading the config file in the tool, we observe the same slack values previously during the timing analysis after synthesis stage. If you observe the report, the fanout is high and also the load cap value is high. By reducing them, we can reduce the slack.
+Below are the ss of the process I followed to reduce these two parameters in the **openLANE flow itself**.
+
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/high%20fanout%20.png)
+#### setting fanout variable to 4 (from 6)
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/setting%20fanout%20var%20to%204.png)
+
+#### Changing fanout and running synthesis.
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/changing%20the%20fanout%20and%20running%20synthesis.png
+
+Now, I will use the modified verilog file during the synthesis process and load that file in the STA tool.
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/loading%20back%20.v%20file%20in%20the%20STA%20tool%20after%20fanout%20.png)
+
+We now modified the fanouts. If you could observe the timing report, we have a buf chain in the design. This is because we enabled the BUFFERING env variable in the openLANE and performed the synthesis. Our next choice to improve the slack is to improve these buffers size. This will reduce the cap load and thus effects the slack. 
+
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/buffer%20chain%20effecting%20the%20slew.png)
+![**Decreased slack after the modification**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/decreased%20slack%20by%20upgradind%20size%20of%20buff%20cell.png)
+
+We repeat this until we get the improved slack value.
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/upgrading%20buff%20size.png)
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/upgrading%20another%20buff%20size%20and%20decreasing%20slack.png)
+
+After recursive modifications, we arrive to the below shown TNS and WNS values.
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/final%20wns%20and%20tns%20values.png)
+
+As we know, timing and area are inversly proportional. Though we reduced the slack, we got a huge hit on the area parameter. We can see this after we perform the placement stage with this netlist (First perform floorplan and do not perform synthesis cuz it will rewrite all modifications giving us back our original huge slack).
+
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/increase%20in%20area%20after%20running%20placement%20by%20using%20the%20modified%20netlist%20from%20sta.png)
+
+### **4.CTS**
+
+So, after getting the opt netlist in terms of timing, we proceed to next step i.e., building **Clock Tree Synthesis (CTS)**. We have few parameters for this stage as well, which effects the performance of this stage. 
+![Env variables for CTS stage](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/cts%20satge%20env%20variables.png)
+
+we run cts by giving command *run_cts*. Below is the snapshot where the CTS layers are created in the design.
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/cts%20layers%20getting%20created%20while%20run_cts%20.png)
+After performing CTS, we need to check for our slacks again. This is what we call as "Post-CTS timing analysis". Here we check the hold slack as well because it was not having any significance in previous stages due to absence of clocks. Before that, we need to make some preparations such as creating a db file in the *openROAD* application etc. 
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/postcts_timing_analysis_preps.png)
+After preparations, we are good to go to report the timing. Below are the snapshots which shows the report and also shows that Setup and Hold slacks are met.
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/postcts_slack.png)
+
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/setup%20slack%20met.png)
+
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/hold%20slack%20met.png)
+
+We all know that in CTS to adjust slew values, CTS engine (in ASIC Flow) uses special buffers called "Clock Buffers". Same happens in the OpenLANE flow. The CTS engine chooses between 4 types of clock buffers present in the list as shown below. Usally, CTS engine chooses the clock buffers from left to right and checks for slew values. We can force the CTS engine to choose required the clock buffer by removing other buffers from the list. This is want I did in the workshop. I modified the clock buffer env variable list and performed CTS again. Wtih this we get a more improved slack value. 
+
+![**Clock buffer order**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/clk%20buffers%20order.png)
+![**Improved Slack**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-4/clock%20buff%202%20improved%20slack.png)
+
+----
+
+## Day-5 [Final steps for RTL2GDS using tritonRoute and openSTA]
+
+After performing CTS, we are now left with the last step in PnR flow i.e., Routing
+
+### **5.Routing**
+
+If you remember from the floorplanning stage, we didn't perform the PG routing (Power Ground routing). Unlike ASIC flow, PG Routing happens at the routing stage in the openLANE flow.
+Hence we first build our Power Distribution Network by using *gen_pdn*. 
 
