@@ -13,7 +13,7 @@ a System-on-a-Chip (SoC)._" - the research paper introducing OpenLANE (click [he
 
 ## Table of Contents
 
-* [**Day-1 [Inception of open-source EDA, OpenLANE and Sky130 PDK]**](https://github.com/Lanka1919/skywater-openlane-physical-design#day-1-inception-of-open-source-eda-openlane-and-sky130-pdk)
+* [**Day-1 [Inception of open-source EDA, OpenLANE and Sky130 PDK]**](https://github.com/lankasaicharan/skywater-openlane-physical-design#day-1-inception-of-open-source-eda-openlane-and-sky130-pdk)
   
   > [**1. Synthesis**](https://github.com/lankasaicharan/skywater-openlane-physical-design#1synthesis)
    
