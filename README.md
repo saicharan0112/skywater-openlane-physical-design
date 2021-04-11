@@ -14,10 +14,28 @@ a System-on-a-Chip (SoC)._" - the research paper introducing OpenLANE (click [he
 ## Table of Contents
 
 * [**Day-1 [Inception of open-source EDA, OpenLANE and Sky130 PDK]**](https://github.com/Lanka1919/skywater-openlane-physical-design#day-1-inception-of-open-source-eda-openlane-and-sky130-pdk)
+  
+  > [**1. Synthesis**]()
+   
 * [**Day-2 [Good floorplan vs bad floorplan and introduction to library cells]**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/README.md#day-2-good-floorplan-vs-bad-floorplan-and-introduction-to-library-cells)
+
+  > [**2. Floorplanning**]()
+ 
+  > [**3. Placement**]()
+   
 * [**Day-3 [Design library cell using Magic Layout and ngspice characterization]**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/README.md#day-3-design-library-cell-using-magic-layout-and-ngspice-characterization)
+     
+  > [**Working with a custom cell design (Here it was an inverter)**]()
+   
 * [**Day-4 [Pre-layout timing analysis and importance of good clock tree]**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/README.md#day-4-pre-layout-timing-analysis-and-importance-of-good-clock-tree)
-* [**Day-5 [Final steps for RTL2GDS using tritonRoute and openSTA]**]()
+      
+  > [**4. CTS**]()
+ 
+* [**Day-5 [Final steps for RTL2GDS using tritonRoute and openSTA]**](https://github.com/lankasaicharan/skywater-openlane-physical-design#day-5-final-steps-for-rtl2gds-using-tritonroute-and-opensta)
+   
+  > [**5. Routing**]()
+  
+  > [**6. RC Extraction**]()
 
 -----------------
 
