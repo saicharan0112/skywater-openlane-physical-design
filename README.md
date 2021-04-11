@@ -1,4 +1,3 @@
-![text option](https://user-images.githubusercontent.com/47289509/114283167-feac2100-9a65-11eb-9802-0f3227ec31db.png)
 # Skywater-OpenLANE-physical-design
 
 VSD SKy130 Openlane Physical Design is a 5-day workshop where I learnt about the opensource EDA tools involved in the synthesis, physical design and gdsii stages. 
