@@ -76,9 +76,10 @@ Once we are sure about the clean design, we extract the GDSII file which is the 
 
 ### OpenLANE flow
 
-OpenLANE flow is an automated RTL2GDSII flow where all required tools are embedded into it and you have complete control of each process. We control them by using env variables which will be discussed at each stage since they are unique for each of them.
+OpenLANE flow is an automated RTL2GDSII flow where all required tools are embedded into it and you have complete control of each process. We control them by using env variables which will be discussed at each stage since they are unique for each of them. 
  
- **Refer the workshop journey from Synthesis to GDSII**
+ **If you like to get a picture of the flow for a design, please refer the workshop journey from Synthesis to GDSII where PICORV32a design is considered. Below are the links for the steps in the flow**
+ 
 > [**1. Synthesis**](https://github.com/lankasaicharan/skywater-openlane-physical-design#1synthesis)
 
 > [**2. Floorplanning**](https://github.com/lankasaicharan/skywater-openlane-physical-design#2floorplanning)
@@ -96,7 +97,65 @@ OpenLANE flow is an automated RTL2GDSII flow where all required tools are embedd
 > [**8. GDSII**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/README.md#8gdsii)
 
 
-Before we start the flow, we need to config the OpenLANE flow by mentioning the  
+This OpenLANE flow is specially designed for **_no human interaction based RTL2GDSII flow_**. Hence we have automated mode and interactive mode to run the OpenLANE flow. Before we start the flow, we need to config the OpenLANE flow by mentioning the essential/design specific parameters in the config file. In the config file, we have the following environment variables which are available for the flow to start. 
+
+`DESIGN_NAME VERILOG_FILES CLOCK_PERIOD CLOCK_NET CLOCK_PORT`
+
+#### Snapshot of the basic configs file
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/asic%20vs%20openlane/required%20env%20variables%20to%20start%20the%20flow.png)
+Once these are setup, we will envoke the flow using a tcl script (in interactive mode) and start the flow by preparing the flow according to the design. 
+
+`package require openlane 0.9`
+
+`prep -design <design_name> [-tag <runs_file_name>] [-overwrite]`
+
+This will prepare the design the design by considering lefs, config files mentioned previously etc. After this step, we are ready to start our flow
+
+### 1. Synthesis ( Tools: Yosys, abc, OpenSTA )
+We just use command `run_synthesis` to perform synthesis which created a netlist file. It also performs the post-synthesis STA and generates reports at the end. But there are few parameters which can be set to customize our synthesis procedure. Below are few parameters - 
+
+`SYNTH_BUFFERING SYNTH_SIZING SYNTH_STRATEGY` and many more. 
+
+#### Snapshot of the parameters for the Synthesis stage
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/asic%20vs%20openlane/synthesis%20variables.png)
+
+### 2. Floorplanning ( Tools: init_fp, ioplacer, tapcell )
+We just use command `run_floorplan` to perform floorplanning in OpenLANE. In this stage, core and die areas are decided, I/O pins are placed and physical cells are placed.
+
+#### Snapshot of the parameters for the Floorplan stage
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/asic%20vs%20openlane/floorplanning%20env%20variables.png)
+
+### 3. Placement ( Tools: RePLace, Resizer, OpenPhySyn, OpenDP )
+We just use command `run_placement` to perform Placement in OpenLANE. In this stage, placement is done in three steps - Global placement, Detailed placement, optimization.
+
+#### Snapshot of the parameters for the Placement stage
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/asic%20vs%20openlane/placement%20env%20vars.png)
+
+### 4. CTS ( Tools: TritonCTS )
+We just use command `run_cts` to perform CTS in OpenLANE. In this stage, clock tree is built. We do not have many parameters to control the CTS, but have few important ones as shown below.
+
+#### Snapshot of the parameters for the CTS stage
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/asic%20vs%20openlane/cts%20env%20vars.png)
+
+### 5. Routing ( Tools: pdn, FastRoute, TritonRoute )
+We generate the Power Distribution network for our design using command `gen_pdn`. We then use command `run_routing` to perform routing in OpenLANE. In this stage, same as ASIC flow, routing is done is two parts - global routing and detailed routing
+
+#### Snapshot of the parameters for the Routing stage
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/asic%20vs%20openlane/routing%20env%20vars.png)
+
+### 6. RC Extraction (Tools: SPEF Extractor)
+We can extract spef files using SPEF Extractor tool. 
+
+### 7. Physical Verification (Tools: MAGIC, NETGEN)
+MAGIC tool is used for DRC and antenna checks whereas NETGEN is used for the LVS checks
+
+### 8. GDSII (Tools: MAGIC)
+In the final stage, we create the GDSII file from our **_DRC CLEAN DESIGN_** using MAGIC tool. This will terminate the RTL@GDSII flow. 
+
+---
+
+This is the table showcasing available tools for each stage in chip designing process.
+
 
 ## Acknowledgments
 1. Kunal Ghosh - (Co-founder, VLSI System Design) - One who helped me to refine the above content
