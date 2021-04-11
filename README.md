@@ -512,8 +512,8 @@ After getting a clean DRC design, we are ready to tap out (send to the shuttle f
 
 ## Acknowledgments
 
-[1] ![Kunal Ghosh](https://github.com/kunalg123) - Co-founder (VSD Corp. Pvt. Ltd)
-[2] ![Nickson Jose](https://github.com/nickson-jose/) - Teaching Assistant - One who guided through out the OpenLANE flow
-[3] Praharsha - Teaching Assistant - One who supported on Slack Channel by solving problems
-[4] Akurathi Radhika - Teaching Assistant - One who supported on Slack Channel by solving problems
-[5] Tim Edwards - Founder (Opencircuitdesign) - One who helped me in solving on how to find a specific cell using its name in MAGIC tool
+1. [Kunal Ghosh](https://github.com/kunalg123) - Co-founder (VSD Corp. Pvt. Ltd)
+2. [Nickson Jose](https://github.com/nickson-jose/) - Teaching Assistant - One who guided through out the OpenLANE flow
+3.  Praharsha - Teaching Assistant - One who supported on Slack Channel by solving problems
+4.  Akurathi Radhika - Teaching Assistant - One who supported on Slack Channel by solving problems
+5.  Tim Edwards - Founder (Opencircuitdesign) - One who helped me in solving on how to find a specific cell using its name in MAGIC tool
