@@ -15,28 +15,31 @@ a System-on-a-Chip (SoC)._" - the research paper introducing OpenLANE (click [he
 
 * [**Day-1 [Inception of open-source EDA, OpenLANE and Sky130 PDK]**](https://github.com/Lanka1919/skywater-openlane-physical-design#day-1-inception-of-open-source-eda-openlane-and-sky130-pdk)
   
-  > [**1. Synthesis**]()
+  > [**1. Synthesis**](https://github.com/lankasaicharan/skywater-openlane-physical-design#1synthesis)
    
 * [**Day-2 [Good floorplan vs bad floorplan and introduction to library cells]**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/README.md#day-2-good-floorplan-vs-bad-floorplan-and-introduction-to-library-cells)
 
-  > [**2. Floorplanning**]()
+  > [**2. Floorplanning**](https://github.com/lankasaicharan/skywater-openlane-physical-design#2floorplanning)
  
-  > [**3. Placement**]()
+  > [**3. Placement**](https://github.com/lankasaicharan/skywater-openlane-physical-design#3placement)
    
 * [**Day-3 [Design library cell using Magic Layout and ngspice characterization]**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/README.md#day-3-design-library-cell-using-magic-layout-and-ngspice-characterization)
      
-  > [**Working with a custom cell design (Here it was an inverter)**]()
+  > [**Working with a custom cell design (Here it was an inverter)**](https://github.com/lankasaicharan/skywater-openlane-physical-design#understanding-drc-in-magic-tool)
    
 * [**Day-4 [Pre-layout timing analysis and importance of good clock tree]**](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/README.md#day-4-pre-layout-timing-analysis-and-importance-of-good-clock-tree)
       
-  > [**4. CTS**]()
+  > [**4. CTS**](https://github.com/lankasaicharan/skywater-openlane-physical-design#4cts)
  
 * [**Day-5 [Final steps for RTL2GDS using tritonRoute and openSTA]**](https://github.com/lankasaicharan/skywater-openlane-physical-design#day-5-final-steps-for-rtl2gds-using-tritonroute-and-opensta)
    
-  > [**5. Routing**]()
+  > [**5. Routing**](https://github.com/lankasaicharan/skywater-openlane-physical-design#5routing)
   
   > [**6. RC Extraction**]()
-
+  
+  > [**7. Physical Verification**]()
+   
+  > [**8. GDSII]()
 -----------------
 
 ## Day-1 [Inception of open-source EDA, OpenLANE and Sky130 PDK]
@@ -474,5 +477,37 @@ After performing CTS, we are now left with the last step in PnR flow i.e., Routi
 ### **5.Routing**
 
 If you remember from the floorplanning stage, we didn't perform the PG routing (Power Ground routing). Unlike ASIC flow, PG Routing happens at the routing stage in the openLANE flow.
-Hence we first build our Power Distribution Network by using *gen_pdn*. 
+Hence we first build our Power Distribution Network (PDN) by using *gen_pdn*. 
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-5/generating%20the%20pdn.png)
+After building the PDN, we now have a def file (under the tmp directory, but couldn't open it to view). This will be current def file for the tool to proceed furthur.
+We will proceed furthur to perform the routing. Similar to other stages, we have specific env variables for this stage as well. Below is the list of env variables.
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-5/opts%20in%20routing.png)
+Here the parameter which decided the effectiveness of routing is the ROUTING_STRATEGY. More the value of this parameter, higher is the QoR and hence more time. This decided the DRC violations too (high value, less DRCs). The tool used here is TritonRoute. We use the command "run_routing" to perform the routing in OpenLANE.
+
+When we compare to ASIC flow, we recollect that there will be two steps in the routing stage
+1. Global routing 
+2. Detailed routing
+
+Similarly, we have both included in the OpenLANE. Global Routing is performed by the "Fast Route" tool where GCells are created (similar to that of ASIC flow). That data is taken by the "Tritonroute" tool to perform the detailed routing. 
+Unfortunately, I couldn't complete the routing process due to intermediate issues. But I was able to understand the furthur steps which were mostly of looking into files, performing post-route STA, solving for DRC errors and using the def file in the routing database for the RC Extraction step.
+Most route STA is very similar to the process we did during the pre-CTS and post-CTS timing analysis. We need to solve the **DRC** errors using the **MAGIC** layout tool and need to verify **LVS** using **NETGEN** tool. The RC Extraction part is covered in the next section.
+
+### **6.RC Extraction**
+
+This step is to extract the SPEF file from the routing database. Unfortunately, we do not have a SPEF Extractor embedded in the OpenLANE flow. Hence we use the SPEF Extractor tool seperately which is mostly of running python scripts whose inputs are lef (the physical library) file and the def (the routed design) file. 
+
+### **7.Physical Verification**
+
+After all the steps performed till now, we need to do the physical verification. We have two tools embedded in the OpenLANE flow - MAGIC for DRC and NETGEN for LVS. 
+
+### **8.GDSII**
+
+After getting a clean DRC design, we are ready to tap out (send to the shuttle for fabrication). To extract the GDSII file, we use MAGIC. 
+
+#### GDSII options in MAGIC
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-5/gdsii.png)
+
+#### GDSII saving file in MAGIC
+![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-5/saving%20gdsii%20file.png)
+
 
