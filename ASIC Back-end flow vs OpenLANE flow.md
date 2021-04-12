@@ -69,8 +69,8 @@ Once we are sure about the clean design, we extract the GDSII file which is the 
 **_Few things which are to be noted are_** :
 1. The complete process is iterative
 2. We check for timing at almost every stage
-3. Many things are hidden from each other since PDKs, LEFs, LIBS that are supplied from the foundry are proprietary and EDA tools are proprietary (thus their algorithms involved in the process as well). 
-4. Since everything is proprietary, not everyone are allowed t build a chip (the final goal) 
+3. Many things are hidden from each other since PDKs, LEFs, LIBS that are supplied from the foundry and EDA tools are proprietary (thus their algorithms involved in the process as well). 
+4. Since everything is proprietary, not everyone are allowed to build a chip (the final goal) 
 
 ---
 
