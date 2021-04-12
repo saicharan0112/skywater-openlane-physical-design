@@ -152,6 +152,8 @@ MAGIC tool is used for DRC and antenna checks whereas NETGEN is used for the LVS
 ### 8. GDSII (Tools: MAGIC)
 In the final stage, we create the GDSII file from our **_DRC CLEAN DESIGN_** using MAGIC tool. This will terminate the RTL2GDSII flow. 
 
+--- 
+
 **Below is the OpenLANE flow including commands and its function**
 
 <img src="https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/asic%20vs%20openlane/Openlane%20flow%20(1).png" alt="OpenLANE flow" height="700" width="400"/>
