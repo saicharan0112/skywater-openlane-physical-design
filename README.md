@@ -510,6 +510,8 @@ After getting a clean DRC design, we are ready to tap out (send to the shuttle f
 #### GDSII saving file in MAGIC
 ![](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/Day-5/saving%20gdsii%20file.png)
 
+**With this, I successfully completed the workshop by exploring and understanding the opensource environment in the VLSI Back-end flow of building a chip. I also got a chance to document the differences between the ASIC backend flow and the OpenLANE flow. It was an additional experience in this workshop. Click [here](https://github.com/lankasaicharan/skywater-openlane-physical-design/blob/main/ASIC%20Back-end%20flow%20vs%20OpenLANE%20flow.md) to explore that.**
+
 ## Acknowledgments
 
 1. [Kunal Ghosh](https://github.com/kunalg123) - Co-founder (VSD Corp. Pvt. Ltd)
