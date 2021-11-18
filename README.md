@@ -1,6 +1,6 @@
 # Skywater-OpenLANE-physical-design
 
-VSD SKy130 Openlane Physical Design is a 5-day workshop where I learnt about the opensource EDA tools involved in the synthesis, physical design and gdsii stages. 
+VSD Sky130 Openlane Physical Design is a 5-day workshop where I learnt about the opensource EDA tools involved in the synthesis, physical design and verification stages. 
 First, I will be briefing about the Openlane flow and the tools involved in it. Later, I will be documenting my journey of 5 days in the workshop.
 
 ## OpenLane 
